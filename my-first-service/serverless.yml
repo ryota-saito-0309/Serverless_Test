@@ -23,8 +23,13 @@ frameworkVersion: '2'
 provider:
   name: aws
   runtime: nodejs12.x
+  stage: ${opt:stage, self:custom.defaultStage}
+  #profileオプション追加
+  profile: ${opt:profile, self:custom.defaultProfile}
+  #regionオプション追加
+  region: ${opt:region, self:custom.defaultRegion}
 
-# you can overwrite defaults here
+  # you can overwrite defaults here
 #  stage: dev
 #  region: us-east-1
 
@@ -56,6 +61,14 @@ provider:
 #  exclude:
 #    - exclude-me.js
 #    - exclude-me-dir/**
+
+custom:
+  defaultStage: dev
+  #何も指定がなければ default profile
+  defaultProfile: default
+  #何も指定がなければ 東京リージョン
+  defaultRegion: ap-northeast-1
+
 
 functions:
   hello:
